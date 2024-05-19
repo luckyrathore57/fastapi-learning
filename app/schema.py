@@ -3,23 +3,6 @@ from datetime import datetime
 from typing import Optional
 
 
-class PostBase(BaseModel):
-    title:str
-    content:str
-    published: bool=True
-
-
-class CreatePost(PostBase):
-    pass
-
-
-class PostResponse(PostBase):
-    id:int
-    created_at:datetime
-    class Config:               #need_to_learn_about #pydantic model and sqlalchemy model
-        orm_mode = True
-
-
 class UserCreated(BaseModel):
     email:EmailStr
     password:str
@@ -36,6 +19,28 @@ class UserResponse(BaseModel):
 class UserLogin(BaseModel):
     username:EmailStr
     password:str
+
+
+
+class PostBase(BaseModel):
+    title:str
+    content:str
+    published: bool=True
+
+
+class CreatePost(PostBase):
+    pass
+
+
+class PostResponse(PostBase):
+    id:int
+    created_at:datetime
+    owner:UserResponse
+    
+    class Config:               #need_to_learn_about #pydantic model and sqlalchemy model
+        orm_mode = True
+
+
 
 class Token(BaseModel):
     access_token:str
