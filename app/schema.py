@@ -40,7 +40,11 @@ class PostResponse(PostBase):
     class Config:               #need_to_learn_about #pydantic model and sqlalchemy model
         orm_mode = True
 
-
+class PostResponseVote(BaseModel):
+    Post:PostResponse
+    votes:int
+    class Config:
+        orm_mode=True
 
 class Token(BaseModel):
     access_token:str
@@ -48,3 +52,8 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     id:Optional[str]=None
+
+
+class Vote(BaseModel):
+    post_id:int
+    user_id:int
